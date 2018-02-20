@@ -77,20 +77,27 @@ branch_to_theme_mapping = {
     'master': default_html_theme,
     'alabaster': 'alabaster',
 }
+sphinx_html_theme = default_html_theme
 
 # Invoke git to get the current branch which we use to get the theme
 try:
     import os.path
+    import re
     import subprocess
 
     path_to_here = os.path.abspath(os.path.dirname(__file__))
-    p = subprocess.Popen(['git', 'rev-parse', '--abbrev-ref', 'HEAD'], stdout=subprocess.PIPE, cwd=path_to_here)
-    current_branch = p.communicate()[0].strip()
+    p = subprocess.Popen(['git', 'branch'], stdout=subprocess.PIPE, cwd=path_to_here)
 
-    sphinx_html_theme = branch_to_theme_mapping.get(current_branch, default_html_theme)
-    print(u'Got theme {} from branch {}'.format(sphinx_html_theme, current_branch))
+    # This will contain something like "* (HEAD detached at origin/MYBRANCH)"
+    branch_output = p.communicate()[0]
+
+    match = re.search(r'\(HEAD detached at origin/(?P<branch_name>[^\)]+)\)', branch_output)
+
+    if match:
+        current_branch = match.groupdict()['branch_name']
+        sphinx_html_theme = branch_to_theme_mapping.get(current_branch, default_html_theme)
+        print(u'Got theme {} from branch {}'.format(sphinx_html_theme, current_branch))
 except Exception:
-    sphinx_html_theme = default_html_theme
     print(u'Error getting current branch - using default theme')
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
