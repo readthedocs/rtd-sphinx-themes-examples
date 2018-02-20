@@ -1,10 +1,20 @@
-*******************************
-RTD Sphinx Theme Sample Project
-*******************************
+***********************************
+Read the Docs Sphinx Theme Examples
+***********************************
 
-This is a sample project using the `RTD Sphinx Theme`_.
+The goal of this project is to illustrate what documentation looks like with different `Sphinx`_ themes when built locally and when built by `Read the Docs`_.
 
-The goal of this project is to illustrate what this theme looks like when built locally and when built by `Read the Docs`_.
-
+.. _Sphinx: http://www.sphinx-doc.org
 .. _Read the Docs: https://readthedocs.org
-.. _RTD Sphinx Theme: https://github.com/rtfd/sphinx_rtd_theme
+
+
+Organization
+============
+
+This repository is organized such that the documentation for different branches is built with a different Sphinx theme.
+
+* `master` uses the `Read the Docs theme`_: 
+* `alabaster` uses the `Alabaster theme`_: 
+
+.. _Read the Docs theme: https://github.com/rtfd/sphinx_rtd_theme/
+.. _Alabaster theme: https://github.com/bitprophet/alabaster/

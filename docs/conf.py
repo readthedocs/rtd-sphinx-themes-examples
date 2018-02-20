@@ -19,7 +19,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = u'RTD Sphinx Theme Sample'
+project = u'Read the Docs Sphinx Theme Examples'
 copyright = u'2018, Read the Docs, Inc & contributors'
 author = u'Read the Docs, Inc & contributors'
 
@@ -71,10 +71,32 @@ pygments_style = 'sphinx'
 
 # -- Options for HTML output -------------------------------------------------
 
+# Maps git branches to Sphinx themes
+default_html_theme = 'sphinx_rtd_theme'
+branch_to_theme_mapping = {
+    'master': default_html_theme,
+    'alabaster': 'alabaster',
+}
+
+# Invoke git to get the current branch which we use to get the theme
+try:
+    import os.path
+    import subprocess
+
+    path_to_here = os.path.abspath(os.path.dirname(__file__))
+    p = subprocess.Popen(['git', 'rev-parse', '--abbrev-ref', 'HEAD'], stdout=subprocess.PIPE, cwd=path_to_here)
+    current_branch = p.communicate()[0].strip()
+
+    sphinx_html_theme = branch_to_theme_mapping.get(current_branch, default_html_theme)
+    print(u'Got theme {} from branch {}'.format(sphinx_html_theme, current_branch))
+except Exception:
+    sphinx_html_theme = default_html_theme
+    print(u'Error getting current branch - using default theme')
+
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'sphinx_rtd_theme'
+html_theme = sphinx_html_theme
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -128,7 +150,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'RTDSphinxThemeSample.tex', u'RTD Sphinx Theme Sample Documentation',
+    (master_doc, 'RTDSphinxThemeSample.tex', project,
      u'Read the Docs, Inc \\& contributors', 'manual'),
 ]
 
@@ -138,7 +160,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'rtdsphinxthemesample', u'RTD Sphinx Theme Sample Documentation',
+    (master_doc, 'rtdsphinxthemesample', project,
      [author], 1)
 ]
 
@@ -149,7 +171,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'RTDSphinxThemeSample', u'RTD Sphinx Theme Sample Documentation',
+    (master_doc, 'RTDSphinxThemeSample', project,
      author, 'RTDSphinxThemeSample', 'One line description of project.',
      'Miscellaneous'),
 ]
