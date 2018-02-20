@@ -13,8 +13,8 @@ Organization
 
 This repository is organized such that the documentation for different branches is built with a different Sphinx theme.
 
-* `master` uses the `Read the Docs theme`_: 
-* `alabaster` uses the `Alabaster theme`_: 
+* `master` uses the `Read the Docs theme`_: http://rtd-sphinx-theme-sample-project.readthedocs.io/en/latest/
+* `alabaster` uses the `Alabaster theme`_: http://rtd-sphinx-theme-sample-project.readthedocs.io/en/alabaster/
 
 .. _Read the Docs theme: https://github.com/rtfd/sphinx_rtd_theme/
 .. _Alabaster theme: https://github.com/bitprophet/alabaster/
