@@ -15,6 +15,41 @@
 # import os
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
+import logging
+import os.path
+import re
+import subprocess
+
+
+logger = logging.getLogger('rtd-samples')
+
+
+def get_git_branch():
+    """Get the git branch this repository is currently on"""
+    path_to_here = os.path.abspath(os.path.dirname(__file__))
+
+    # Invoke git to get the current branch which we use to get the theme
+    try:
+        p = subprocess.Popen(['git', 'branch'], stdout=subprocess.PIPE, cwd=path_to_here)
+
+        # This will contain something like "* (HEAD detached at origin/MYBRANCH)"
+        # or something like "* MYBRANCH"
+        branch_output = p.communicate()[0]
+
+        # This is if git is in a normal branch state
+        match = re.search(r'\* (?P<branch_name>.+)', branch_output)
+        if match:
+            return match.groupdict()['branch_name']
+
+        # git is in a detached HEAD state
+        match = re.search(r'\(HEAD detached at origin/(?P<branch_name>[^\)]+)\)', branch_output)
+        if match:
+            return match.groupdict()['branch_name']
+    except Exception:
+        logger.exception(u'Could not get the branch')
+
+    # Couldn't figure out the branch probably due to an error
+    return None
 
 
 # -- Project information -----------------------------------------------------
@@ -77,27 +112,13 @@ branch_to_theme_mapping = {
     'master': default_html_theme,
     'alabaster': 'alabaster',
 }
-sphinx_html_theme = default_html_theme
+current_branch = get_git_branch()
 
-# Invoke git to get the current branch which we use to get the theme
-try:
-    import os.path
-    import re
-    import subprocess
-
-    path_to_here = os.path.abspath(os.path.dirname(__file__))
-    p = subprocess.Popen(['git', 'branch'], stdout=subprocess.PIPE, cwd=path_to_here)
-
-    # This will contain something like "* (HEAD detached at origin/MYBRANCH)"
-    branch_output = p.communicate()[0]
-
-    match = re.search(r'\(HEAD detached at origin/(?P<branch_name>[^\)]+)\)', branch_output)
-
-    if match:
-        current_branch = match.groupdict()['branch_name']
-        sphinx_html_theme = branch_to_theme_mapping.get(current_branch, default_html_theme)
-        print(u'Got theme {} from branch {}'.format(sphinx_html_theme, current_branch))
-except Exception:
+if current_branch:
+    sphinx_html_theme = branch_to_theme_mapping.get(current_branch, default_html_theme)
+    print(u'Got theme {} from branch {}'.format(sphinx_html_theme, current_branch))
+else:
+    sphinx_html_theme = default_html_theme
     print(u'Error getting current branch - using default theme')
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
