@@ -109,11 +109,20 @@ pygments_style = 'sphinx'
 # Maps git branches to Sphinx themes
 default_html_theme = 'sphinx_rtd_theme'
 branch_to_theme_mapping = {
+    # 3rd party themes
     'master': default_html_theme,
+
+    # Sphinx built-in themes
     'alabaster': 'alabaster',
     'classic': 'classic',
     'sphinxdoc': 'sphinxdoc',
     'scrolls': 'scrolls',
+    'agogo': 'agogo',
+    'traditional': 'traditional',
+    'nature': 'nature',
+    'haiku': 'haiku',
+    'pyramid': 'pyramid',
+    'bizstyle': 'bizstyle',
 }
 current_branch = get_git_branch()
 

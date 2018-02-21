@@ -18,6 +18,12 @@ This repository is organized such that the documentation for different branches 
 * ``classic``: https://rtd-sphinx-theme-sample-project.readthedocs.io/en/classic/ (a Sphinx built-in theme)
 * ``sphinxdoc``: https://rtd-sphinx-theme-sample-project.readthedocs.io/en/sphinxdoc/ (a Sphinx built-in theme)
 * ``scrolls``: https://rtd-sphinx-theme-sample-project.readthedocs.io/en/scrolls/ (a Sphinx built-in theme)
+* ``agogo``: https://rtd-sphinx-theme-sample-project.readthedocs.io/en/agogo/ (a Sphinx built-in theme)
+* ``traditional``:  https://rtd-sphinx-theme-sample-project.readthedocs.io/en/traditional/ (a Sphinx built-in theme)
+* ``nature``:  https://rtd-sphinx-theme-sample-project.readthedocs.io/en/nature/ (a Sphinx built-in theme)
+* ``haiku``:  https://rtd-sphinx-theme-sample-project.readthedocs.io/en/haiku/ (a Sphinx built-in theme)
+* ``pyramid``:  https://rtd-sphinx-theme-sample-project.readthedocs.io/en/pyramid/ (a Sphinx built-in theme)
+* ``bizstyle``:  https://rtd-sphinx-theme-sample-project.readthedocs.io/en/bizstyle/ (a Sphinx built-in theme)
 
 .. _Read the Docs theme: https://github.com/rtfd/sphinx_rtd_theme/
 .. _Alabaster theme: https://github.com/bitprophet/alabaster/
