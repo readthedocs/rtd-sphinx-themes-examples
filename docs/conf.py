@@ -111,6 +111,7 @@ default_html_theme = 'sphinx_rtd_theme'
 branch_to_theme_mapping = {
     'master': default_html_theme,
     'alabaster': 'alabaster',
+    'classic': 'classic',
 }
 current_branch = get_git_branch()
 
