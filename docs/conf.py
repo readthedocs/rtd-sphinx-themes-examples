@@ -37,7 +37,7 @@ def get_git_branch():
         branch_output = p.communicate()[0]
 
         # This is if git is in a normal branch state
-        match = re.search(r'\* (?P<branch_name>[^\(\)]+)', branch_output)
+        match = re.search(r'\* (?P<branch_name>[^\(\)\n ]+)', branch_output)
         if match:
             return match.groupdict()['branch_name']
 
