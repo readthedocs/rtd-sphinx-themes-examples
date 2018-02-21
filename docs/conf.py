@@ -112,7 +112,8 @@ branch_to_theme_mapping = {
     'master': default_html_theme,
     'alabaster': 'alabaster',
     'classic': 'classic',
-    'sphinxdoc': 'sphinxdoc'
+    'sphinxdoc': 'sphinxdoc',
+    'scrolls': 'scrolls',
 }
 current_branch = get_git_branch()
 
